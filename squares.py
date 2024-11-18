@@ -1,4 +1,5 @@
 """Computation of weighted average of squares."""
+from argparse import ArgumentParser
 
 
 def average_of_squares(list_of_numbers, list_of_weights=None):
@@ -49,13 +50,45 @@ def convert_numbers(list_of_strings):
     # ...then convert each substring into a number
     return [float(number_string) for number_string in all_numbers]
 
-
+# Work here 
 if __name__ == "__main__":
-    numbers_strings = ["1","2","4"]
-    weight_strings = ["1","1","1"]        
+    parser = ArgumentParser(description="Calculate the weighted average of squares of a function")
+
+    # Positional argument for numbers
+    parser.add_argument(
+        "numbers",
+        metavar="N",
+        type=float,
+        nargs="+",
+        help="A sequence of numbers for which to calculate the weighted average of squares."
+    )
     
-    numbers = convert_numbers(numbers_strings)
-    weights = convert_numbers(weight_strings)
+    # Optional argument for weights
+    parser.add_argument(
+        "--weights",
+        metavar="W",
+        type=float,
+        nargs="+",
+        help="A sequence of weights corresponding to the numbers. Must be the same length as the numbers."
+    )
+    
+    args = parser.parse_args()
+
+    # Read numbers and weights from command-line arguments
+    numbers = args.numbers
+    weights = args.weights
+
+    # Check if weights were provided, else default to equal weights
+    if weights is None:
+        weights = [1] * len(numbers)
+    elif len(weights) != len(numbers):
+        raise ValueError("The number of weights must match the number of numbers.")
+
+    #numbers_strings = ["1","2","4"]
+    #weight_strings = ["1","1","1"]        
+    
+    #numbers = convert_numbers(numbers_strings)
+    #weights = convert_numbers(weight_strings)
     
     result = average_of_squares(numbers, weights)
     
