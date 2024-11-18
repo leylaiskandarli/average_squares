@@ -63,7 +63,7 @@ if __name__ == "__main__":
         help="A sequence of numbers for which to calculate the weighted average of squares."
     )
     
-    # Optional argument for weights
+    # Optional argument for weights already added
     parser.add_argument(
         "--weights",
         metavar="W",
@@ -84,11 +84,6 @@ if __name__ == "__main__":
     elif len(weights) != len(numbers):
         raise ValueError("The number of weights must match the number of numbers.")
 
-    #numbers_strings = ["1","2","4"]
-    #weight_strings = ["1","1","1"]        
-    
-    #numbers = convert_numbers(numbers_strings)
-    #weights = convert_numbers(weight_strings)
     
     result = average_of_squares(numbers, weights)
     
